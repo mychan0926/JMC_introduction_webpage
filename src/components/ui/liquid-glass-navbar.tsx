@@ -71,11 +71,11 @@ const NIMBUS_CSS = `
 .nimbus-nav[data-refract="on"] .nimbus-glass{-webkit-backdrop-filter:url(#nimbus-refract) blur(2px) saturate(1.2) brightness(1.08);backdrop-filter:url(#nimbus-refract) blur(2px) saturate(1.2) brightness(1.08)}
 .nimbus-water{position:absolute;left:${-PAD}px;top:${-PAD}px;z-index:-1;pointer-events:none}
 .nimbus-nav[data-gl="off"] .nimbus-water{display:none}
-.nimbus-drop{display:none;position:absolute;top:6px;bottom:6px;left:0;border-radius:7px;z-index:-1;pointer-events:none;will-change:transform,width;
+.nimbus-drop{display:none;position:absolute;top:6px;bottom:6px;left:0;border-radius:14px;z-index:-1;pointer-events:none;will-change:transform,width;
   background:radial-gradient(120% 140% at 30% 0%,rgba(255,255,255,.75),rgba(255,255,255,0) 55%),rgba(255,255,255,.38);
   box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -2px 6px rgba(0,162,255,.22),inset 0 0 0 1px rgba(255,255,255,.55),0 6px 16px -6px rgba(0,70,140,.45)}
 .nimbus-nav[data-gl="off"] .nimbus-drop{display:block}
-.nimbus-item{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 16px;border:0;border-radius:7px;background:none;color:var(--n-fg-soft);
+.nimbus-item{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 16px;border:0;border-radius:14px;background:none;color:var(--n-fg-soft);
   font-family:inherit;font-weight:500;font-size:14px;line-height:1;letter-spacing:-.01em;text-decoration:none;cursor:pointer;transition:color .25s}
 .nimbus-item:hover,.nimbus-item[aria-current="location"]{color:var(--n-fg)}
 .nimbus-item:focus-visible{outline:2px solid #00A2FF;outline-offset:2px}
@@ -119,7 +119,7 @@ uniform vec4 uBlob[6];uniform float uSy[6];uniform vec4 uRip[6];uniform vec3 uMo
 float sdRB(vec2 p,vec2 b,float r){vec2 q=abs(p)-b+r;return length(max(q,0.))+min(max(q.x,q.y),0.)-r;}
 float sdCap(vec2 p,vec4 B,float sy){p-=B.xy;p.y/=sy;p.x=max(abs(p.x)-B.z,0.);return(length(p)-B.w)*min(1.,sy);}
 float smin(float a,float b,float k){float h=clamp(.5+.5*(b-a)/k,0.,1.);return mix(b,a,h)-k*h*(1.-h);}
-float dropD(vec2 p){float d=1e4;for(int i=0;i<6;i++){if(uBlob[i].w>.5){vec4 b=uBlob[i];vec2 h=vec2(b.z+b.w,b.w*uSy[i]);float shape=i<2?sdRB(p-b.xy,h,min(7.,min(h.x,h.y))):sdCap(p,b,uSy[i]);d=smin(d,shape,13.);}}return d;}
+float dropD(vec2 p){float d=1e4;for(int i=0;i<6;i++){if(uBlob[i].w>.5){vec4 b=uBlob[i];vec2 h=vec2(b.z+b.w,b.w*uSy[i]);float shape=i<2?sdRB(p-b.xy,h,min(14.,min(h.x,h.y))):sdCap(p,b,uSy[i]);d=smin(d,shape,13.);}}return d;}
 float pillD(vec2 p){vec2 h=uPill.zw*.5;return sdRB(p-uPill.xy-h,h,0.);}
 float lens(float d,float w){float t=clamp(-d/w,0.,1.);return sqrt(1.-(1.-t)*(1.-t));}
 float waves(vec2 p){float w=0.;

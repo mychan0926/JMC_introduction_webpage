@@ -11,7 +11,7 @@ typography:
     fontFamily: Noto Sans KR
     fontSize: 1rem
 rounded:
-  button: 7px
+  button: 14px
   video: 0px
   panel: 0px
 spacing:
@@ -37,4 +37,4 @@ spacing:
 
 ## Components
 
-세로 Waterline 메뉴는 화면 오른쪽에 고정한다. 아이콘에 접근 가능한 이름을 제공하고 현재 섹션을 표시한다. 버튼에만 7px 곡률을 적용하고 메뉴 외곽과 프로필 패널, 영상은 직각으로 둔다. 데모는 16:9 비율과 YouTube 링크를 함께 제공한다.
+세로 Waterline 메뉴는 화면 오른쪽에 고정한다. 아이콘에 접근 가능한 이름을 제공하고 현재 섹션을 표시한다. 버튼에만 14px 곡률을 적용하고 메뉴 외곽과 프로필 패널, 영상은 직각으로 둔다. 데모는 16:9 비율과 YouTube 링크를 함께 제공한다.
