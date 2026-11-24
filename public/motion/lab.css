@@ -88,3 +88,26 @@ input[type="checkbox"] { accent-color: var(--signal); }
 [data-paused] *, [data-paused] *::before, [data-paused] *::after { animation: none !important; transition: none !important; }
 [data-paused] :is(.depth-back, .depth-front) { transform: none; }
 [data-paused] .aperture { clip-path: none; }
+.catalog-tools { display: flex; flex-wrap: wrap; align-items: end; gap: .65rem 1rem; margin-top: 1rem; }
+.catalog-tools label { display: grid; gap: .25rem; }
+.catalog-tools input, .catalog-tools select { min-height: 44px; max-width: 100%; border: 1px solid var(--line); padding: .35rem .6rem; background: #fffef8; color: inherit; font: inherit; }
+#catalog-list [hidden] { display: none; }
+.catalog-motion, .catalog-scroll, .catalog-design { height: 9.5rem; }
+.catalog-motion, .catalog-scroll { background: repeating-linear-gradient(90deg, transparent 0 19px, #879a892c 19px 20px), #e8ece4; }
+.catalog-scroll { overflow-y: auto; scrollbar-gutter: stable; }
+.catalog-track { height: 16rem; }
+.catalog-pin { height: 9rem; display: grid; place-items: center; position: sticky; top: 0; overflow: hidden; }
+.catalog-object { display: grid; place-items: center; box-sizing: border-box; width: 68%; max-width: 12rem; min-height: 3.25rem; text-align: center; border: 1px solid #78978a; background: #fffef8; font-size: .95rem; font-weight: 700; }
+.sample-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .45rem; color: #515a54; font-size: .85rem; }
+.catalog-design { display: grid; align-content: center; gap: .22rem; padding: .8rem 1rem; background: var(--sample-bg); color: var(--sample-fg); }
+.catalog-design strong { font-size: 1.5rem; }
+.catalog-design small { font-size: .8rem; }
+.catalog-design.editorial { border-top: 4px solid var(--sample-accent); }
+.catalog-design.editorial strong { font-family: Georgia, 'Noto Sans KR', serif; }
+.catalog-design.gallery { justify-items: center; text-align: center; }
+.catalog-design.gallery strong { border-bottom: 1px solid var(--sample-accent); }
+.catalog-design.terminal { font-family: ui-monospace, 'Noto Sans KR', monospace; border-left: .45rem solid var(--sample-accent); }
+.catalog-design.grid { background-image: repeating-linear-gradient(90deg,transparent 0 17px,color-mix(in srgb,var(--sample-accent) 24%,transparent) 17px 18px); }
+.catalog-design.poster strong { font-size: clamp(1.6rem,4vw,2.5rem); font-weight: 800; letter-spacing: -.085em; border-left: .2em solid var(--sample-accent); padding-left: .2em; }
+.catalog-design.split { grid-template-columns: 1fr 1fr; column-gap: .65rem; align-items: center; }
+.catalog-design.split strong { grid-row: span 2; border-right: 1px solid var(--sample-accent); }

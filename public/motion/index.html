@@ -7,6 +7,7 @@
   <title>모션 샘플 · 정명찬</title>
   <link rel="stylesheet" href="./lab.css">
   <script src="./lab.js" defer></script>
+  <script src="./catalog.js" defer></script>
 </head>
 <body>
   <header class="wrap masthead">
@@ -17,7 +18,7 @@
     <section aria-labelledby="title" class="intro">
       <h1 id="title">모션 샘플</h1>
       <p>스크롤하고 눌러 보세요. 마음에 드는 효과를 고르면 코드가 아래에 모입니다.</p>
-      <nav aria-label="샘플 분류"><a href="#scroll">스크롤</a><a href="#interaction">클릭과 호버</a><a href="#ambient">잔잔한 움직임</a><a href="#design">디자인</a></nav>
+      <nav aria-label="샘플 분류"><a href="#catalog">전체 예시</a><a href="#scroll">스크롤</a><a href="#interaction">클릭과 호버</a><a href="#ambient">잔잔한 움직임</a><a href="#design">디자인</a></nav>
     </section>
 
     <section id="scroll" class="group" aria-labelledby="scroll-title">
@@ -111,6 +112,16 @@
         <label><input type="checkbox" value="D02"> D02 선택</label>
         <label><input type="checkbox" value="D03"> D03 선택</label>
       </div>
+    </section>
+    <section id="catalog" class="group" aria-labelledby="catalog-title">
+      <h2 id="catalog-title">예시 찾아보기</h2>
+      <p>키워드나 코드로 검색하고, 모션은 재생 버튼으로 비교하세요.</p>
+      <div class="catalog-tools">
+        <label>검색 <input id="catalog-search" type="search" placeholder="예: 확대, 타임라인, M12"></label>
+        <label>분류 <select id="catalog-category"></select></label>
+        <output id="catalog-count" aria-live="polite"></output>
+      </div>
+      <div id="catalog-list" class="samples"></div>
     </section>
     <section class="group selection" aria-labelledby="selection-title">
       <h2 id="selection-title">내 선택</h2>

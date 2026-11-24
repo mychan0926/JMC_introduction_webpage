@@ -57,16 +57,17 @@ looks.forEach(button => button.addEventListener('click', () => changeView(() => 
   looks.forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)))
 })))
 
-const picks = document.querySelectorAll('input[type="checkbox"]')
 const selection = document.querySelector('#selection-text')
 const copy = document.querySelector('#copy')
 const status = document.querySelector('#status')
 
-picks.forEach(pick => pick.addEventListener('change', () => {
-  selection.value = Array.from(picks).filter(item => item.checked).map(item => item.value).join(', ')
+document.addEventListener('change', event => {
+  if (!event.target.matches('input[type="checkbox"][data-sample], article input[type="checkbox"], .design-picks input[type="checkbox"]')) return
+  const picked = document.querySelectorAll('article input:checked, .design-picks input:checked')
+  selection.value = [...picked].map(item => item.value).sort().join(', ')
   copy.disabled = !selection.value
   status.textContent = ''
-}))
+})
 
 copy.addEventListener('click', async () => {
   try {
