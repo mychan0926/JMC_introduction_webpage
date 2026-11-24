@@ -12,6 +12,7 @@ const projects = [
     category: '2026 · Roguelike',
     description: '무작위 맵 생성과 시드 시스템, 저장 기능을 다루며 게임 데이터를 설계하고 관리하는 방법을 익힌 프로젝트입니다.',
     stack: ['맵 생성', '시드 시스템', '저장'],
+    videos: [{ label: '맵 생성 데모', id: 'XqVjtWEf6fI' }, { label: '데모 2', id: 'AI7QxedrC34' }, { label: '데모 3', id: '_LQ8qrrYA_8' }, { label: '데모 4', id: '32U4kwS4WLM' }],
   },
   {
     id: 'fps',
@@ -19,6 +20,7 @@ const projects = [
     category: '2026 · First-person shooter',
     description: '1인칭 슈터 프로토타입을 만들며 3D 기능과 애니메이션 적용을 연습했습니다.',
     stack: ['3D', '애니메이션', '1인칭'],
+    videos: [{ label: '최종 결과물', id: 'pXuUgRJ-Kd0' }, { label: '중간 결과물', id: '73SCwmoy2EQ' }],
   },
   {
     id: 'survivor',
@@ -26,6 +28,7 @@ const projects = [
     category: '2026 · Survival action',
     description: '서바이벌 액션 게임의 기본 구조를 구현하며 Unity 기능을 익힌 프로토타입입니다.',
     stack: ['Unity', '프로토타입'],
+    videos: [{ label: '플레이 영상', id: 'v-_alUuY4QU' }],
   },
   {
     id: 'melon',
@@ -33,6 +36,7 @@ const projects = [
     category: '2025 · Puzzle',
     description: 'GDG on Campus HUFS Unity 스터디에서 진행한 토이 프로젝트입니다. 작은 게임을 만들며 Unity 사용법을 익혔습니다.',
     stack: ['Unity', '스터디'],
+    videos: [{ label: '플레이 영상', id: 'Z1epywKMp6c' }],
   },
 ] as const
 
@@ -86,6 +90,17 @@ function App() {
           </div>
         </section>
 
+        <nav className="contents section" aria-label="목차">
+          <p className="eyebrow">Contents</p>
+          <h2>목차</h2>
+          <div className="contents-links">
+            <a href="#work">프로젝트</a>
+            {projects.map(project => <a key={project.id} href={'#' + project.id}>{project.title}</a>)}
+            <a href="#about">소개와 활동</a>
+            <a href="#contact">연락 및 링크</a>
+          </div>
+        </nav>
+
         <section id="work" className="section" aria-labelledby="work-title">
           <div className="section-heading">
             <p className="eyebrow">Selected work</p>
@@ -93,7 +108,7 @@ function App() {
           </div>
           <div className="grid gap-5 md:grid-cols-2">
             {projects.map((project) => (
-              <article className="project" key={project.id}>
+              <article className="project" id={project.id} key={project.id}>
                 <div className={'project-visual ' + project.id} aria-hidden="true">
                   <div className="project-glyph"><i /><i /><i /><i /></div>
                 </div>
@@ -104,9 +119,28 @@ function App() {
                   <ul className="tags" aria-label="주요 학습 내용">
                     {project.stack.map((tech) => <li key={tech}>{tech}</li>)}
                   </ul>
+                  <div className="video-block">
+                    <h4>데모 영상</h4>
+                    <div className="video-frame">
+                      <iframe src={'https://www.youtube-nocookie.com/embed/' + project.videos[0].id} title={project.title + ' 데모 영상'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+                    </div>
+                    <div className="video-links">
+                      {project.videos.map(video => <a key={video.id} href={'https://www.youtube.com/watch?v=' + video.id} target="_blank" rel="noreferrer">{video.label} · YouTube</a>)}
+                    </div>
+                  </div>
                 </div>
               </article>
             ))}
+          </div>
+        </section>
+        <section id="contact" className="section contact" aria-labelledby="contact-title">
+          <p className="eyebrow">Connect</p>
+          <h2 id="contact-title">연락 및 링크</h2>
+          <p className="about-copy">프로젝트와 개발 기록은 GitHub와 블로그에서도 확인할 수 있습니다.</p>
+          <div className="contact-links">
+            <a className="button secondary" href={github}>GitHub</a>
+            <a className="button secondary" href={blog}>개발 블로그</a>
+            <a className="button secondary" href="https://www.linkedin.com/in/myeongchan/">LinkedIn</a>
           </div>
         </section>
 
