@@ -113,22 +113,25 @@ function App() {
         <section id="intro" className="hero" aria-labelledby="intro-title">
           <div className="hero-copy" ref={intro}>
             <h1 id="intro-title">정명찬</h1>
-            <p className="hero-description">게임 클라이언트와 인디 게임을 만드는 공부를 합니다.</p>
+            <p className="hero-description">안녕하세요, 정명찬입니다. 한국외국어대학교에서 컴퓨터공학을 공부하며, 머릿속 아이디어를 직접 플레이할 수 있는 게임으로 만드는 일을 좋아합니다.</p>
             <div className="flex flex-wrap items-center gap-3">
-              <a className="button primary" href="#work">프로젝트 보기</a>
+              <a className="button primary" href="#about">제 이야기 보기</a>
               <a className="button secondary" href={blog}>개발 블로그</a>
             </div>
           </div>
-          <a className="featured-demo" href="#roguelike-demo">
-            <img src="https://i.ytimg.com/vi/XqVjtWEf6fI/hqdefault.jpg" alt="" width="480" height="360" fetchPriority="high" />
-            <span>2D 정통 로그라이크 데모</span>
-          </a>
+          <dl className="stack profile-summary" aria-label="프로필 한눈에 보기">
+            <div><dt>이름</dt><dd>Jung Myeong Chan</dd></div>
+            <div><dt>전공</dt><dd>한국외국어대학교 컴퓨터공학</dd></div>
+            <div><dt>관심 분야</dt><dd>게임 클라이언트, 인디 게임</dd></div>
+            <div><dt>개발 도구</dt><dd>Unity, C#, C++, Python</dd></div>
+          </dl>
         </section>
 
         <section id="about" className="section about" aria-labelledby="about-title">
           <div>
-            <h2 id="about-title">소개와 활동</h2>
-            <p className="about-copy">한국외국어대학교 컴퓨터공학부</p>
+            <h2 id="about-title">게임을 만들며 배운 것</h2>
+            <p className="about-copy">Unity 스터디에서 멜론 게임을 만들며 엔진을 익혔습니다. 이후 1인칭 FPS에서 3D와 애니메이션을 연습했고, 2D 로그라이크에서는 맵 생성과 시드, 저장 기능을 다뤘습니다. 화면에서 보이는 움직임과 그 뒤의 데이터가 어떻게 연결되는지에 관심이 있습니다.</p>
+            <h3 className="history-title">활동과 수상</h3>
             <ul className="milestones" aria-label="주요 활동 및 수상">
               {milestones.map(({ year, title }) => (
                 <li key={title}><span>{year}</span><strong>{title}</strong></li>
