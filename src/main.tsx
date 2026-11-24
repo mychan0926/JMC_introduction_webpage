@@ -1,6 +1,5 @@
 import { StrictMode, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { animate } from 'motion/mini'
 import { LiquidNavbar, NimbusIcons, type LiquidNavItem } from './components/ui/liquid-glass-navbar'
 import './styles.css'
 
@@ -91,12 +90,25 @@ function App() {
     }
   }, [])
 
-  const intro = useRef<HTMLDivElement>(null)
+  const mainRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    if (!intro.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const animation = animate(intro.current, { opacity: [0.35, 1] }, { duration: 0.3 })
-    return () => animation.stop()
+    const main = mainRef.current
+    if (!main || !('IntersectionObserver' in window)) return
+
+    const targets = main.querySelectorAll('[data-reveal]')
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) entry.target.classList.remove('motion-entered')
+        else if (entry.intersectionRatio >= 0.16) entry.target.classList.add('motion-entered')
+      }
+    }, { threshold: [0, 0.16] })
+
+    targets.forEach(target => observer.observe(target))
+    return () => {
+      observer.disconnect()
+      targets.forEach(target => target.classList.remove('motion-entered'))
+    }
   }, [])
 
   return (
@@ -105,9 +117,9 @@ function App() {
       <div className="liquid-rail">
         <LiquidNavbar tone="light" compact items={navItems} active={sections.findIndex(([id]) => id === active)} />
       </div>
-      <main id="main" className="shell">
-        <section id="intro" className="hero" aria-labelledby="intro-title">
-          <div className="hero-copy" ref={intro}>
+      <main id="main" className="shell" ref={mainRef}>
+        <section id="intro" className="hero" aria-labelledby="intro-title" data-reveal="profile">
+          <div className="hero-copy">
             <h1 id="intro-title">정명찬</h1>
             <p className="hero-description">안녕하세요, 정명찬입니다. 한국외국어대학교에서 컴퓨터공학을 공부하며, 머릿속 아이디어를 직접 플레이할 수 있는 게임으로 만드는 일을 좋아합니다.</p>
           </div>
@@ -124,7 +136,7 @@ function App() {
             <h2 id="about-title">활동과 수상</h2>
             <ul className="milestones" aria-label="주요 활동 및 수상">
               {milestones.map(({ year, title }) => (
-                <li key={title}><span>{year}</span><strong>{title}</strong></li>
+                <li key={title} data-reveal="timeline"><span>{year}</span><strong>{title}</strong></li>
               ))}
             </ul>
           </div>
@@ -146,7 +158,7 @@ function App() {
                   </ul>
                 </div>
                   <div className="video-block" id={project.id + '-demo'}>
-                    <div className="video-frame">
+                    <div className="video-frame" data-reveal="demo">
                       <iframe src={'https://www.youtube-nocookie.com/embed/' + project.videos[0].id} title={project.title + ' 데모 영상'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
                     </div>
                     <div className="video-links">
@@ -164,7 +176,7 @@ function App() {
         </section>
         <section id="contact" className="section contact" aria-labelledby="contact-title">
           <h2 id="contact-title">연락 및 링크</h2>
-          <div className="contact-links">
+          <div className="contact-links" data-reveal="links">
             {profileLinks.map(({ label, href, path }) => (
               <a key={href} className="link-icon" href={href} aria-label={label} title={label}>
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={path} /></svg>

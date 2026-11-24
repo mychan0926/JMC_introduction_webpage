@@ -164,43 +164,31 @@ h3 { margin: .3rem 0 .5rem; font-size: 1.45rem; font-weight: 700; letter-spacing
 }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
-  .profile-summary, .contact { position: relative; isolation: isolate; }
+  .profile-summary, .contact { position: relative; isolation: isolate; overflow: clip; }
   .profile-summary::before, .contact::before {
-    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-    background: radial-gradient(ellipse at 35% 60%, #8ccce52c, transparent 66%) 0 0 / 170% 100%;
-    animation: ambient-light 16s ease-in-out infinite alternate;
+    content: ""; position: absolute; inset: -22% -12%; z-index: -1; pointer-events: none;
+    background: radial-gradient(ellipse at 34% 55%, #86c9ec69, transparent 53%);
+    animation: ambient-light 12s ease-in-out infinite alternate;
   }
-  .contact::before { animation-duration: 22s; animation-delay: -6s; }
+  .contact::before { animation-duration: 17s; animation-delay: -6s; opacity: .55; }
   .link-icon { transition: background-color .2s, transform .24s; }
   .link-icon:is(:hover, :focus-visible) { transform: translateY(-3px); }
-  @supports (animation-timeline: view()) {
-    .profile-summary {
-      animation: profile-depth linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 35%;
-    }
-    .milestones li strong {
-      animation: timeline-slide linear both;
-      animation-timeline: view();
-      animation-range: entry 10% entry 95%;
-    }
-    .video-frame:not(:focus-within) {
-      animation: demo-open linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 80%;
-    }
-    .contact-links {
-      animation: link-arrival linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 90%;
-    }
-  }
+  [data-reveal="profile"].motion-entered .hero-copy { animation: intro-arrive .78s cubic-bezier(.16,1,.3,1) both; }
+  [data-reveal="profile"].motion-entered .profile-summary { animation: profile-depth 1s cubic-bezier(.16,1,.3,1) .08s both; }
+  [data-reveal="timeline"].motion-entered strong { animation: timeline-slide .74s cubic-bezier(.2,.75,.2,1) both; }
+  [data-reveal="timeline"].motion-entered:nth-child(even) strong { animation-delay: .09s; }
+  [data-reveal="demo"].motion-entered:not(:focus-within) { animation: demo-open .9s cubic-bezier(.22,.8,.24,1) both; }
+  [data-reveal="links"].motion-entered:not(:focus-within) .link-icon { animation: link-arrival .66s cubic-bezier(.16,1,.3,1) both; }
+  [data-reveal="links"].motion-entered .link-icon:nth-child(2) { animation-delay: .07s; }
+  [data-reveal="links"].motion-entered .link-icon:nth-child(3) { animation-delay: .14s; }
+  [data-reveal="links"].motion-entered .link-icon:nth-child(4) { animation-delay: .21s; }
 }
-@keyframes ambient-light { to { background-position: 100% 0; } }
-@keyframes profile-depth { from { transform: perspective(900px) rotateX(8deg) translateY(12px) scale(.98); } to { transform: none; } }
-@keyframes timeline-slide { from { opacity: .7; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
-@keyframes demo-open { from { clip-path: inset(0 0 12% 0); } to { clip-path: inset(0); } }
-@keyframes link-arrival { from { gap: 0; } to { gap: .65rem; } }
+@keyframes ambient-light { from { transform: translate(-9%, -6%); } to { transform: translate(22%, 10%); } }
+@keyframes intro-arrive { from { opacity: .25; translate: 0 22px; } to { opacity: 1; translate: none; } }
+@keyframes profile-depth { from { opacity: .4; transform: perspective(760px) rotateX(17deg) translateY(24px) scale(.92); } to { opacity: 1; transform: none; } }
+@keyframes timeline-slide { from { opacity: .24; translate: -24px; } to { opacity: 1; translate: none; } }
+@keyframes demo-open { from { opacity: .55; clip-path: inset(0 0 40% 0); } to { opacity: 1; clip-path: inset(0); } }
+@keyframes link-arrival { from { opacity: .25; translate: 0 15px; } to { opacity: 1; translate: none; } }
 @media (prefers-reduced-transparency: reduce) {
   .site-header .shell, .project, .stack { background: #edf4fa; backdrop-filter: none; }
 }
