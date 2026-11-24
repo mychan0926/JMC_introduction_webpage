@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?Noto+Sans+KR:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 :root {
   color-scheme: dark;
-  font-family: Geist, 'Noto Sans KR', system-ui, sans-serif;
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
   color: #f5f8ff;
   background: #080f1c;
   --muted: #b8c7dc;
@@ -46,14 +46,6 @@ nav a:hover, footer a:hover, .stack a:hover { color: var(--accent); }
 .eyebrow { margin: 0; color: var(--accent); font-size: .875rem; font-weight: 600; letter-spacing: .075em; }
 .eyebrow span { padding-inline: .3em; }
 h1 { margin: 1rem 0 1.25rem; font-size: clamp(3.15rem, 6.9vw, 6rem); font-weight: 750; line-height: .99; letter-spacing: -.085em; }
-h1 em { color: var(--accent); font-style: normal; }
-@supports (background-clip: text) {
-  h1 em {
-    background: linear-gradient(104deg, #e6faff 0%, #a7defe 41%, #c5b8ff 92%);
-    background-clip: text;
-    color: transparent;
-  }
-}
 .hero-description, .about-copy { color: var(--muted); line-height: 1.8; max-width: 34rem; word-break: keep-all; }
 .hero-description { margin: 0 0 1.85rem; }
 .button {
