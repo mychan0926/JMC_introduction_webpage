@@ -1,6 +1,7 @@
 import { StrictMode, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { animate } from 'motion/mini'
+import { LiquidNavbar, NimbusIcons, type LiquidNavItem } from './components/ui/liquid-glass-navbar'
 import './styles.css'
 
 const github = 'https://github.com/mychan0926'
@@ -55,6 +56,13 @@ const sections = [
   ['contact', '연락'],
 ] as const
 
+const navItems: LiquidNavItem[] = sections.map(([id, label], index) => ({
+  href: '#' + id,
+  label,
+  icon: [NimbusIcons.home, NimbusIcons.user, NimbusIcons.globe, NimbusIcons.plane][index],
+  fx: ['glow', 'wave', 'spin', 'pop'][index] as LiquidNavItem['fx'],
+}))
+
 function App() {
   const [active, setActive] = useState<string>('intro')
 
@@ -98,14 +106,9 @@ function App() {
           </nav>
         </div>
       </header>
-      <nav className="dot-nav" aria-label="섹션 이동">
-        {sections.map(([id, label]) => (
-          <a key={id} href={'#' + id} aria-label={label} aria-current={active === id ? 'location' : undefined}>
-            <span className="nav-dot" />
-            <span className="dot-label" aria-hidden="true">{label}</span>
-          </a>
-        ))}
-      </nav>
+      <div className="liquid-rail">
+        <LiquidNavbar tone="dark" compact items={navItems} active={sections.findIndex(([id]) => id === active)} />
+      </div>
       <main id="main" className="shell">
         <section id="intro" className="hero" aria-labelledby="intro-title">
           <div className="hero-copy" ref={intro}>

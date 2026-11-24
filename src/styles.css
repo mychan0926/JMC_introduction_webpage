@@ -108,20 +108,23 @@ h1 em { color: var(--accent); font-style: normal; }
 .cross-bottom { bottom: 1rem; left: 1.3rem; }
 .section { padding-block: 3.4rem; border-top: 1px solid var(--line); scroll-margin-top: 1rem; }
 .section-heading { margin-bottom: 1.4rem; }
-.dot-nav {
-  position: fixed; z-index: 10; top: .65rem; left: 50%; transform: translateX(-50%);
-  display: flex; padding: 0 .45rem; border: 1px solid var(--glass-edge);
-  border-radius: 999px; background: #14243ae8; backdrop-filter: blur(20px); box-shadow: var(--glass-shadow);
+.liquid-rail { position: fixed; z-index: 10; top: 50%; right: 1.9rem; width: 0; height: 0; }
+.liquid-rail .nimbus-nav { position: absolute; top: 0; left: 0; width: max-content; transform: translate(-50%, -50%) rotate(90deg); }
+.liquid-rail .nv-ico { rotate: -90deg; }
+.liquid-rail .nimbus-item[aria-current="location"] { color: #fff; filter: drop-shadow(0 0 2px #10263e); }
+.shell { width: min(calc(100% - 8rem), 72rem); }
+.site-header { padding-top: 1rem; }
+@media (max-width: 760px) {
+  .shell { width: auto; margin-left: 1rem; margin-right: 4rem; }
+  .site-header nav { gap: .65rem; }
+  .hero h1 { font-size: clamp(2.35rem, 9vw, 3.75rem); }
+  .project-copy { padding: .8rem; }
+  .stack div { grid-template-columns: 5rem 1fr; }
 }
-.dot-nav a { position: relative; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; }
-.nav-dot { width: .5rem; height: .5rem; border-radius: 50%; background: #9cb0ca; transition: transform .28s, background .28s, box-shadow .28s; }
-.dot-nav a[aria-current] .nav-dot { transform: scale(1.45); background: #d6f6ff; box-shadow: 0 0 .85rem #78dfff; }
-.dot-label {
-  position: absolute; top: calc(100% + .4rem); width: max-content; padding: .25rem .55rem;
-  border-radius: .45rem; background: #162941; color: #e6f6ff; font-size: .8rem;
-  opacity: 0; transform: translateY(-.25rem); transition: opacity .18s, transform .18s; pointer-events: none;
+@media (max-width: 360px) {
+  .liquid-rail { right: 1.65rem; }
+  .shell { width: auto !important; margin-left: .75rem; margin-right: 3.5rem; }
 }
-.dot-nav a:is(:hover, :focus-visible) .dot-label { opacity: 1; transform: translateY(0); }
 .skip-link { z-index: 11; }
 .section, .project, .hero { scroll-margin-top: 4.3rem; }
 .video-links a:hover { color: white; }
