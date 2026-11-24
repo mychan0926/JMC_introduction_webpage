@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useRef } from 'react'
+import { StrictMode, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { animate } from 'motion/mini'
 import './styles.css'
@@ -10,7 +10,7 @@ const projects = [
     id: 'roguelike',
     title: '2D 정통 로그라이크',
     category: '2026 · Roguelike',
-    description: '무작위 맵 생성과 시드 시스템, 저장 기능을 다루며 게임 데이터를 설계하고 관리하는 방법을 익힌 프로젝트입니다.',
+    description: '시드 기반 맵 생성과 저장 기능을 실험한 2D 게임.',
     stack: ['맵 생성', '시드 시스템', '저장'],
     videos: [{ label: '맵 생성 데모', id: 'XqVjtWEf6fI' }, { label: '데모 2', id: 'AI7QxedrC34' }, { label: '데모 3', id: '_LQ8qrrYA_8' }, { label: '데모 4', id: '32U4kwS4WLM' }],
   },
@@ -18,7 +18,7 @@ const projects = [
     id: 'fps',
     title: '1인칭 FPS',
     category: '2026 · First-person shooter',
-    description: '1인칭 슈터 프로토타입을 만들며 3D 기능과 애니메이션 적용을 연습했습니다.',
+    description: '3D와 애니메이션을 적용한 슈터 프로토타입.',
     stack: ['3D', '애니메이션', '1인칭'],
     videos: [{ label: '최종 결과물', id: 'pXuUgRJ-Kd0' }, { label: '중간 결과물', id: '73SCwmoy2EQ' }],
   },
@@ -26,7 +26,7 @@ const projects = [
     id: 'survivor',
     title: '뱀서 라이크',
     category: '2026 · Survival action',
-    description: '서바이벌 액션 게임의 기본 구조를 구현하며 Unity 기능을 익힌 프로토타입입니다.',
+    description: 'Unity로 구현한 서바이벌 액션 프로토타입.',
     stack: ['Unity', '프로토타입'],
     videos: [{ label: '플레이 영상', id: 'v-_alUuY4QU' }],
   },
@@ -34,7 +34,7 @@ const projects = [
     id: 'melon',
     title: '멜론 게임',
     category: '2025 · Puzzle',
-    description: 'GDG on Campus HUFS Unity 스터디에서 진행한 토이 프로젝트입니다. 작은 게임을 만들며 Unity 사용법을 익혔습니다.',
+    description: 'GDG on Campus HUFS Unity 스터디 프로젝트.',
     stack: ['Unity', '스터디'],
     videos: [{ label: '플레이 영상', id: 'Z1epywKMp6c' }],
   },
@@ -48,7 +48,35 @@ const milestones = [
   { year: '2022', title: '서울 ICT 창의성 경진대회 C언어 알고리즘 마스터 부문 금상' },
 ]
 
+const sections = [
+  ['intro', '프로필'],
+  ['about', '이력'],
+  ['work', '프로젝트'],
+  ['contact', '연락'],
+] as const
+
 function App() {
+  const [active, setActive] = useState<string>('intro')
+
+  useEffect(() => {
+    const update = () => {
+      const marker = window.innerHeight * 0.4
+      const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4
+      const current = [...sections].reverse().find(([id]) => {
+        const section = document.getElementById(id)
+        return section && section.getBoundingClientRect().top <= marker
+      })
+      setActive(atEnd ? 'contact' : current?.[0] ?? 'intro')
+    }
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [])
+
   const intro = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -70,12 +98,20 @@ function App() {
           </nav>
         </div>
       </header>
+      <nav className="dot-nav" aria-label="섹션 이동">
+        {sections.map(([id, label]) => (
+          <a key={id} href={'#' + id} aria-label={label} aria-current={active === id ? 'location' : undefined}>
+            <span className="nav-dot" />
+            <span className="dot-label" aria-hidden="true">{label}</span>
+          </a>
+        ))}
+      </nav>
       <main id="main" className="shell">
-        <section className="hero" aria-labelledby="intro">
+        <section id="intro" className="hero" aria-labelledby="intro-title">
           <div className="hero-copy" ref={intro}>
             <p className="eyebrow">정명찬 <span>·</span> Jung Myeong Chan</p>
-            <h1 id="intro">Game Client<br /><em>Development</em></h1>
-            <p className="hero-description">게임 클라이언트 프로그래머이자 인디 게임 개발자를 꿈꿉니다. 아이디어를 직접 플레이할 수 있는 게임으로 만들기 위해 공부합니다.</p>
+            <h1 id="intro-title">Game Client<br /><em>Development</em></h1>
+            <p className="hero-description">게임 클라이언트 개발자 · 인디 게임 개발자 지망생</p>
             <div className="flex flex-wrap items-center gap-3">
               <a className="button primary" href="#work">프로젝트 보기</a>
               <a className="button secondary" href={blog}>개발 블로그</a>
@@ -90,20 +126,26 @@ function App() {
           </div>
         </section>
 
-        <nav className="contents section" aria-label="목차">
-          <p className="eyebrow">Contents</p>
-          <h2>목차</h2>
-          <div className="contents-links">
-            <a href="#work">프로젝트</a>
-            {projects.map(project => <a key={project.id} href={'#' + project.id}>{project.title}</a>)}
-            <a href="#about">소개와 활동</a>
-            <a href="#contact">연락 및 링크</a>
+        <section id="about" className="section about" aria-labelledby="about-title">
+          <div>
+            <h2 id="about-title">소개와 활동</h2>
+            <p className="about-copy">한국외국어대학교 컴퓨터공학부</p>
+            <ul className="milestones" aria-label="주요 활동 및 수상">
+              {milestones.map(({ year, title }) => (
+                <li key={title}><span>{year}</span><strong>{title}</strong></li>
+              ))}
+            </ul>
           </div>
-        </nav>
+          <dl className="stack">
+            <div><dt>언어</dt><dd>C++, C#, Python</dd></div>
+            <div><dt>게임 엔진</dt><dd>Unity</dd></div>
+            <div><dt>알고리즘</dt><dd><a href="https://solved.ac/profile/mychan0926">Solved.ac</a></dd></div>
+            <div><dt>프로필</dt><dd><a href="https://www.linkedin.com/in/myeongchan/">LinkedIn</a></dd></div>
+          </dl>
+        </section>
 
         <section id="work" className="section" aria-labelledby="work-title">
           <div className="section-heading">
-            <p className="eyebrow">Selected work</p>
             <h2 id="work-title">프로젝트</h2>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
@@ -134,7 +176,6 @@ function App() {
           </div>
         </section>
         <section id="contact" className="section contact" aria-labelledby="contact-title">
-          <p className="eyebrow">Connect</p>
           <h2 id="contact-title">연락 및 링크</h2>
           <p className="about-copy">프로젝트와 개발 기록은 GitHub와 블로그에서도 확인할 수 있습니다.</p>
           <div className="contact-links">
@@ -144,24 +185,6 @@ function App() {
           </div>
         </section>
 
-        <section id="about" className="section about" aria-labelledby="about-title">
-          <div>
-            <p className="eyebrow">About</p>
-            <h2 id="about-title">소개와 활동</h2>
-            <p className="about-copy">한국외국어대학교에서 컴퓨터공학을 공부합니다. Unity로 게임을 만들고, 알고리즘 문제 풀이와 문제 출제를 통해 구현력을 기르고 있습니다.</p>
-            <ul className="milestones" aria-label="주요 활동 및 수상">
-              {milestones.map(({ year, title }) => (
-                <li key={title}><span>{year}</span><strong>{title}</strong></li>
-              ))}
-            </ul>
-          </div>
-          <dl className="stack">
-            <div><dt>언어</dt><dd>C++, C#, Python</dd></div>
-            <div><dt>게임 엔진</dt><dd>Unity</dd></div>
-            <div><dt>알고리즘</dt><dd><a href="https://solved.ac/profile/mychan0926">Solved.ac</a></dd></div>
-            <div><dt>프로필</dt><dd><a href="https://www.linkedin.com/in/myeongchan/">LinkedIn</a></dd></div>
-          </dl>
-        </section>
       </main>
       <footer className="site-footer">
         <div className="shell flex flex-wrap items-center justify-between gap-4">
