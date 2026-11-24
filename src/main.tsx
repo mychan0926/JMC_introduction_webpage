@@ -51,8 +51,11 @@ const milestones = [
   { year: '2026–', title: '대학생 연합 게임제작 동아리 BRIDGE 14기' },
   { year: '2025', title: '제7회 HUFS Code Festival 문제 출제' },
   { year: '2023', title: '제5회 HUFS Code Festival 3등상' },
+  { year: '2023.03', title: '한국외국어대학교 컴퓨터공학 입학' },
   { year: '2022', title: '서울 ICT 창의성 경진대회 C언어 알고리즘 마스터 부문 금상' },
 ]
+
+const mapRooms = new Set([7, 8, 15, 16, 17, 22, 23, 24, 30, 31, 37])
 
 const sections = [
   ['intro', '프로필'],
@@ -156,9 +159,22 @@ function App() {
                   <ul className="tags" aria-label="주요 학습 내용">
                     {project.stack.map((tech) => <li key={tech}>{tech}</li>)}
                   </ul>
+                  {project.id === 'roguelike' && (
+                    <figure className="map-study">
+                      <div className="map-grid" aria-hidden="true">
+                        {Array.from({ length: 42 }, (_, cell) => (
+                          <span key={cell} data-room={mapRooms.has(cell) ? '' : undefined} />
+                        ))}
+                      </div>
+                      <figcaption>
+                        <strong>시드 기반 맵 생성</strong>
+                        <small>방 배치를 단순화한 개념도</small>
+                      </figcaption>
+                    </figure>
+                  )}
                 </div>
                   <div className="video-block" id={project.id + '-demo'}>
-                    <div className="video-frame" data-reveal="demo">
+                    <div className="video-frame">
                       <iframe src={'https://www.youtube-nocookie.com/embed/' + project.videos[0].id} title={project.title + ' 데모 영상'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
                     </div>
                     <div className="video-links">
