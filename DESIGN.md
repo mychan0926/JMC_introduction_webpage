@@ -2,10 +2,10 @@
 version: alpha
 name: 정명찬 자기소개
 colors:
-  background: "#f7fafd"
-  text: "#17283b"
-  muted: "#485c72"
-  accent: "#16558b"
+  background: "#f8f4e9"
+  text: "#302b23"
+  muted: "#5b564b"
+  accent: "#4d5f50"
 typography:
   body:
     fontFamily: Noto Sans KR
@@ -25,7 +25,7 @@ spacing:
 
 ## Colors
 
-밝은 청백색 배경에 짙은 남색 본문과 파란색 링크를 사용한다. 유리 효과는 프로필 정보와 세로 내비게이션에 집중한다.
+샘플 D01의 종이색 배경과 짙은 글자를 쓰고, 링크와 날짜에는 차분한 녹색을 사용한다.
 
 ## Typography
 
@@ -33,7 +33,7 @@ spacing:
 
 ## Layout
 
-프로필, 이력, 프로젝트, 연락 순으로 배치한다. 프로젝트 설명 옆의 데모는 22rem 이하로 제한하고 작은 화면에서는 설명 아래에 둔다.
+프로필, 이력, 프로젝트, 연락 순으로 배치한다. 샘플 D08처럼 데스크톱에서 이력의 제목과 날짜 목록을 좌우로 분리한다. 프로젝트 데모는 22rem 이하로 제한하고 작은 화면에서는 설명 아래에 둔다.
 
 ## Components
 

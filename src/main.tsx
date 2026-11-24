@@ -135,14 +135,12 @@ function App() {
         </section>
 
         <section id="about" className="section about" aria-labelledby="about-title">
-          <div>
-            <h2 id="about-title">활동과 수상</h2>
-            <ul className="milestones" aria-label="주요 활동 및 수상">
-              {milestones.map(({ year, title }) => (
-                <li key={title} data-reveal="timeline"><span>{year}</span><strong>{title}</strong></li>
-              ))}
-            </ul>
-          </div>
+          <h2 id="about-title">활동과 수상</h2>
+          <ul className="milestones" aria-label="주요 활동 및 수상">
+            {milestones.map(({ year, title }) => (
+              <li key={title} data-reveal="timeline"><span>{year}</span><strong>{title}</strong></li>
+            ))}
+          </ul>
         </section>
 
         <section id="work" className="section" aria-labelledby="work-title">

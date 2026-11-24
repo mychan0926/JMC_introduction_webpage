@@ -1,27 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?Noto+Sans+KR:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 :root {
   color-scheme: light;
   font-family: 'Noto Sans KR', system-ui, sans-serif;
-  color: #17283b;
-  background: #f7fafd;
-  --muted: #485c72;
-  --accent: #16558b;
-  --line: #c9d8e6;
-  --glass-edge: #b9cede;
-  --glass-shadow: inset 0 1px 0 #ffffffde, inset 0 -1px 0 #b8d4ea33, 0 18px 48px #19365014;
-  --glass-fill: linear-gradient(145deg, #ffffffc2, #ecf5fb84 70%), #f9fcfdd9;
+  color: #302b23;
+  background: #f8f4e9;
+  --muted: #5b564b;
+  --accent: #4d5f50;
+  --line: #d6ccba;
+  --glass-edge: #c9bda8;
+  --glass-shadow: inset 0 1px 0 #ffffffde, 0 8px 28px #493c2610;
+  --glass-fill: #fffdf6d9;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(ellipse 47rem 33rem at 78% 13rem, #dceffc 0%, transparent 72%),
-    radial-gradient(ellipse 42rem 32rem at 5% 42rem, #e7edfb 0%, transparent 77%),
-    radial-gradient(ellipse 62rem 42rem at 92% 73rem, #e0f0ef 0%, transparent 72%),
-    #f7fafd;
+  background: #f8f4e9;
 }
 a { color: inherit; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
@@ -122,13 +118,15 @@ h3 { margin: .3rem 0 .5rem; font-size: 1.45rem; font-weight: 700; letter-spacing
 .site-footer { border-top: 1px solid var(--line); padding-block: 1.5rem; }
 .hero { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
 .hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); letter-spacing: -.06em; }
-.about { grid-template-columns: minmax(0, 42rem); }
+.about { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(1rem, 5vw, 4rem); }
+.about .milestones { margin-top: 0; }
+.milestones li::before { outline-color: #f8f4e9; }
 .link-icon {
   display: inline-flex; align-items: center; justify-content: center; gap: .1rem; width: 2.75rem; height: 2.75rem;
   border: 1px solid var(--glass-edge); border-radius: 14px;
   background: var(--glass-fill); color: var(--accent);
 }
-.link-icon:hover { background: #dcebf8; border-color: #769cbf; }
+.link-icon:hover { background: #eee9dc; border-color: #7e8c78; }
 .featured-demo {
   display: grid; overflow: hidden; border: 1px solid var(--glass-edge); border-radius: 0;
   background: var(--glass-fill); box-shadow: var(--glass-shadow);
@@ -147,7 +145,8 @@ h3 { margin: .3rem 0 .5rem; font-size: 1.45rem; font-weight: 700; letter-spacing
 .project h3 { text-wrap: balance; }
 .video-block { margin: 0; padding: 0; scroll-margin-top: 1rem; }
 .video-block { width: min(100%, 22rem); justify-self: end; }
-.profile-summary { align-self: center; border-top: 2px solid #769cbf; }
+.profile-summary { align-self: center; border-top: 2px solid #6c7968; box-shadow: none; }
+.profile-summary dt { font-size: .875rem; }
 .map-study {
   display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.2rem;
   margin: .4rem 0 0; padding-top: .85rem; border-top: 1px solid var(--line);
@@ -184,7 +183,7 @@ h3 { margin: .3rem 0 .5rem; font-size: 1.45rem; font-weight: 700; letter-spacing
   .profile-summary, .contact { position: relative; isolation: isolate; overflow: clip; }
   .profile-summary::before, .contact::before {
     content: ""; position: absolute; inset: -22% -12%; z-index: -1; pointer-events: none;
-    background: radial-gradient(ellipse at 34% 55%, #86c9ec69, transparent 53%);
+    background: radial-gradient(ellipse at 34% 55%, #d2b47538, transparent 53%);
     animation: ambient-light 12s ease-in-out infinite alternate;
   }
   .contact::before { animation-duration: 17s; animation-delay: -6s; opacity: .55; }
@@ -205,5 +204,5 @@ h3 { margin: .3rem 0 .5rem; font-size: 1.45rem; font-weight: 700; letter-spacing
 @keyframes timeline-slide { from { opacity: .24; translate: -24px; } to { opacity: 1; translate: none; } }
 @keyframes link-arrival { from { opacity: .25; translate: 0 15px; } to { opacity: 1; translate: none; } }
 @media (prefers-reduced-transparency: reduce) {
-  .site-header .shell, .project, .stack { background: #edf4fa; backdrop-filter: none; }
+  .site-header .shell, .project, .stack { background: #fffdf6; backdrop-filter: none; }
 }
