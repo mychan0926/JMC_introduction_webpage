@@ -6,6 +6,12 @@ import './styles.css'
 
 const github = 'https://github.com/mychan0926'
 const blog = 'https://gameplace.tistory.com/'
+const profileLinks = [
+  { label: 'GitHub', href: github, path: 'M8 6 3 12l5 6m8-12 5 6-5 6M14 4l-4 16' },
+  { label: '개발 블로그', href: blog, path: 'M5 4h13v16H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm1 4h9m-9 4h9m-9 4h5' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/myeongchan/', path: 'M5 10v9m0-14v.01M10 19v-9m0 3a4 4 0 0 1 8 0v6' },
+  { label: 'Solved.ac', href: 'https://solved.ac/profile/mychan0926', path: 'm12 3 8 4v10l-8 4-8-4V7Zm-4 9 3 3 5-6' },
+]
 const projects = [
   {
     id: 'roguelike',
@@ -96,16 +102,6 @@ function App() {
   return (
     <>
       <a className="skip-link" href="#main">본문으로 건너뛰기</a>
-      <header className="site-header">
-        <div className="shell flex items-center justify-between">
-          <a className="wordmark" href="#main" aria-label="정명찬 포트폴리오 홈">JMC<span>.</span></a>
-          <nav aria-label="주 메뉴" className="flex items-center gap-5 sm:gap-8">
-            <a href="#work">프로젝트</a>
-            <a href="#about">소개</a>
-            <a href={github}>GitHub</a>
-          </nav>
-        </div>
-      </header>
       <div className="liquid-rail">
         <LiquidNavbar tone="light" compact items={navItems} active={sections.findIndex(([id]) => id === active)} />
       </div>
@@ -114,10 +110,6 @@ function App() {
           <div className="hero-copy" ref={intro}>
             <h1 id="intro-title">정명찬</h1>
             <p className="hero-description">안녕하세요, 정명찬입니다. 한국외국어대학교에서 컴퓨터공학을 공부하며, 머릿속 아이디어를 직접 플레이할 수 있는 게임으로 만드는 일을 좋아합니다.</p>
-            <div className="flex flex-wrap items-center gap-3">
-              <a className="button primary" href="#about">제 이야기 보기</a>
-              <a className="button secondary" href={blog}>개발 블로그</a>
-            </div>
           </div>
           <dl className="stack profile-summary" aria-label="프로필 한눈에 보기">
             <div><dt>이름</dt><dd>Jung Myeong Chan</dd></div>
@@ -129,21 +121,13 @@ function App() {
 
         <section id="about" className="section about" aria-labelledby="about-title">
           <div>
-            <h2 id="about-title">게임을 만들며 배운 것</h2>
-            <p className="about-copy">Unity 스터디에서 멜론 게임을 만들며 엔진을 익혔습니다. 이후 1인칭 FPS에서 3D와 애니메이션을 연습했고, 2D 로그라이크에서는 맵 생성과 시드, 저장 기능을 다뤘습니다. 화면에서 보이는 움직임과 그 뒤의 데이터가 어떻게 연결되는지에 관심이 있습니다.</p>
-            <h3 className="history-title">활동과 수상</h3>
+            <h2 id="about-title">활동과 수상</h2>
             <ul className="milestones" aria-label="주요 활동 및 수상">
               {milestones.map(({ year, title }) => (
                 <li key={title}><span>{year}</span><strong>{title}</strong></li>
               ))}
             </ul>
           </div>
-          <dl className="stack">
-            <div><dt>언어</dt><dd>C++, C#, Python</dd></div>
-            <div><dt>게임 엔진</dt><dd>Unity</dd></div>
-            <div><dt>알고리즘</dt><dd><a href="https://solved.ac/profile/mychan0926">Solved.ac</a></dd></div>
-            <div><dt>프로필</dt><dd><a href="https://www.linkedin.com/in/myeongchan/">LinkedIn</a></dd></div>
-          </dl>
         </section>
 
         <section id="work" className="section" aria-labelledby="work-title">
@@ -166,7 +150,12 @@ function App() {
                       <iframe src={'https://www.youtube-nocookie.com/embed/' + project.videos[0].id} title={project.title + ' 데모 영상'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
                     </div>
                     <div className="video-links">
-                      {project.videos.map(video => <a key={video.id} href={'https://www.youtube.com/watch?v=' + video.id} target="_blank" rel="noreferrer">{video.label} · YouTube</a>)}
+                      {project.videos.map((video, index) => (
+                        <a className="link-icon" key={video.id} href={'https://www.youtube.com/watch?v=' + video.id} target="_blank" rel="noreferrer" aria-label={project.title + ' ' + video.label + ' (YouTube)'} title={video.label + ' (YouTube)'}>
+                          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                          {project.videos.length > 1 && <span aria-hidden="true">{index + 1}</span>}
+                        </a>
+                      ))}
                     </div>
                   </div>
               </article>
@@ -175,21 +164,16 @@ function App() {
         </section>
         <section id="contact" className="section contact" aria-labelledby="contact-title">
           <h2 id="contact-title">연락 및 링크</h2>
-          <p className="about-copy">프로젝트와 개발 기록은 GitHub와 블로그에서도 확인할 수 있습니다.</p>
           <div className="contact-links">
-            <a className="button secondary" href={github}>GitHub</a>
-            <a className="button secondary" href={blog}>개발 블로그</a>
-            <a className="button secondary" href="https://www.linkedin.com/in/myeongchan/">LinkedIn</a>
+            {profileLinks.map(({ label, href, path }) => (
+              <a key={href} className="link-icon" href={href} aria-label={label} title={label}>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={path} /></svg>
+              </a>
+            ))}
           </div>
         </section>
 
       </main>
-      <footer className="site-footer">
-        <div className="shell flex flex-wrap items-center justify-between gap-4">
-          <span>정명찬 · Jung Myeong Chan</span>
-          <div className="flex gap-6"><a href={github}>GitHub</a><a href={blog}>Blog</a></div>
-        </div>
-      </footer>
     </>
   )
 }
