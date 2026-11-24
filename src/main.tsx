@@ -112,21 +112,17 @@ function App() {
       <main id="main" className="shell">
         <section id="intro" className="hero" aria-labelledby="intro-title">
           <div className="hero-copy" ref={intro}>
-            <p className="eyebrow">정명찬 <span>·</span> Jung Myeong Chan</p>
-            <h1 id="intro-title">Game Client<br /><em>Development</em></h1>
-            <p className="hero-description">게임 클라이언트 개발자 · 인디 게임 개발자 지망생</p>
+            <h1 id="intro-title">정명찬</h1>
+            <p className="hero-description">게임 클라이언트와 인디 게임을 만드는 공부를 합니다.</p>
             <div className="flex flex-wrap items-center gap-3">
               <a className="button primary" href="#work">프로젝트 보기</a>
               <a className="button secondary" href={blog}>개발 블로그</a>
             </div>
           </div>
-          <div className="hero-visual" aria-hidden="true">
-            <div className="hero-plane" />
-            <div className="orbit orbit-outer" />
-            <div className="orbit orbit-inner" />
-            <span className="cross cross-top">+</span><span className="cross cross-bottom">+</span>
-            <div className="hero-monogram">JMC<span>.</span></div>
-          </div>
+          <a className="featured-demo" href="#roguelike-demo">
+            <img src="https://i.ytimg.com/vi/XqVjtWEf6fI/hqdefault.jpg" alt="" width="480" height="360" fetchPriority="high" />
+            <span>2D 정통 로그라이크 데모</span>
+          </a>
         </section>
 
         <section id="about" className="section about" aria-labelledby="about-title">
@@ -151,12 +147,9 @@ function App() {
           <div className="section-heading">
             <h2 id="work-title">프로젝트</h2>
           </div>
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="project-list">
             {projects.map((project) => (
               <article className="project" id={project.id} key={project.id}>
-                <div className={'project-visual ' + project.id} aria-hidden="true">
-                  <div className="project-glyph"><i /><i /><i /><i /></div>
-                </div>
                 <div className="project-copy">
                   <p className="eyebrow">{project.category}</p>
                   <h3>{project.title}</h3>
@@ -164,8 +157,8 @@ function App() {
                   <ul className="tags" aria-label="주요 학습 내용">
                     {project.stack.map((tech) => <li key={tech}>{tech}</li>)}
                   </ul>
-                  <div className="video-block">
-                    <h4>데모 영상</h4>
+                </div>
+                  <div className="video-block" id={project.id + '-demo'}>
                     <div className="video-frame">
                       <iframe src={'https://www.youtube-nocookie.com/embed/' + project.videos[0].id} title={project.title + ' 데모 영상'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
                     </div>
@@ -173,7 +166,6 @@ function App() {
                       {project.videos.map(video => <a key={video.id} href={'https://www.youtube.com/watch?v=' + video.id} target="_blank" rel="noreferrer">{video.label} · YouTube</a>)}
                     </div>
                   </div>
-                </div>
               </article>
             ))}
           </div>
