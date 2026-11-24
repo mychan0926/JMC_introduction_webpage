@@ -107,7 +107,7 @@ function App() {
         </div>
       </header>
       <div className="liquid-rail">
-        <LiquidNavbar tone="dark" compact items={navItems} active={sections.findIndex(([id]) => id === active)} />
+        <LiquidNavbar tone="light" compact items={navItems} active={sections.findIndex(([id]) => id === active)} />
       </div>
       <main id="main" className="shell">
         <section id="intro" className="hero" aria-labelledby="intro-title">

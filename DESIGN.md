@@ -2,10 +2,10 @@
 version: alpha
 name: 정명찬 자기소개
 colors:
-  background: "#080f1c"
-  text: "#f5f8ff"
-  muted: "#b8c7dc"
-  accent: "#bcecff"
+  background: "#f7fafd"
+  text: "#17283b"
+  muted: "#485c72"
+  accent: "#16558b"
 typography:
   body:
     fontFamily: Noto Sans KR
@@ -24,7 +24,7 @@ spacing:
 
 ## Colors
 
-어두운 배경에 밝은 본문과 옅은 파란색 링크를 사용한다. 유리 효과는 프로필 정보와 세로 내비게이션에 집중한다.
+밝은 청백색 배경에 짙은 남색 본문과 파란색 링크를 사용한다. 유리 효과는 프로필 정보와 세로 내비게이션에 집중한다.
 
 ## Typography
 
